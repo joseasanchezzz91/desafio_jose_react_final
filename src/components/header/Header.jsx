@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { NavLink as RRNavLink } from 'react-router-dom';
 import { logoutActionCreator } from '../../store/modules/auth/login.actions';
 
+
 import {
   Collapse,
   Navbar,
@@ -15,6 +16,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
+  import { FaPowerOff} from 'react-icons/fa';
 
 const Header = (props) => {
     const dispatch = useDispatch();
@@ -25,41 +27,37 @@ const Header = (props) => {
 
     const logout = () => {
         dispatch(logoutActionCreator());
-        props.history.push('/login')
+        props.history.push('/')
+      
       }
     return (
       <div className="mb-4">
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">reactstrap</NavbarBrand>
+    
+        <Navbar className="navbar-dark bg-dark"  expand="md" style={{color:"#ffff"}}>
+          <NavbarBrand href="/inicio/bienvenido">Proyecto React G8</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto bla" navbar>
               <NavItem>
-              <NavLink tag={RRNavLink} exact to="/dashboard/users/create" activeClassName="active">Nuevo usuario</NavLink>
+              <NavLink tag={RRNavLink} exact to="/inicio/peliculas" activeClassName="active">Lista Peliculas</NavLink>
               </NavItem>
               <NavItem>
-              <NavLink tag={RRNavLink} exact to="/dashboard/users" activeClassName="active">Listado de usuarios</NavLink>
+              {/* <NavLink tag={RRNavLink} exact to="/dashboard/users" activeClassName="active">Listado de usuarios</NavLink> */}
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   Options
                 </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    Option 1
-                  </DropdownItem>
-                  <DropdownItem>
-                    Option 2
-                  </DropdownItem>
-                  <DropdownItem divider />
+                <DropdownMenu right>    
                   <DropdownItem onClick={logout}>
-                    Cerrar Sesión
+                  <FaPowerOff/> Cerrar Sesión
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
           </Collapse>
         </Navbar>
+        
       </div>
     );
   }

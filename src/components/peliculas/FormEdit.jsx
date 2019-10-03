@@ -1,9 +1,9 @@
-import React ,{useState}from 'react';
+import React from 'react';
 import {Form, FormGroup, Input, Button, Label,CardHeader} from 'reactstrap';
 import useGenericInput from '../../hooks/useGenericInput'
 import {peliculaAsyncAtionEdit} from '../../store/modules/peliculas/peliculas.actions'
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { FaPlusCircle,FaArrowAltCircleLeft} from 'react-icons/fa';
 
 
 const FormEdit = (props) => {
@@ -26,10 +26,11 @@ const valor=props.location.state;
                 "autor":autor.value,
                  "descripcion":descripcion.value}
             dispatch(peliculaAsyncAtionEdit(array)); 
-            setTimeout(() => {
-                props.history.push("/peliculas");
-                
-            }, 2000);
+                props.history.push("/inicio/peliculas"); 
+    }
+
+    const handleCancel=()=>{
+        props.history.push("/inicio/peliculas");
     }
 
     return (
@@ -51,7 +52,8 @@ const valor=props.location.state;
                 <Label>Descripción</Label>
                 <Input {...descripcion} />
             </FormGroup>
-            <Button color='info'  disabled={buttonIsDisabled()} type="submit" >Guardar</Button>
+            <Button color='warning'  onClick={handleCancel}><FaArrowAltCircleLeft/> Cancelar</Button>
+            <Button color='info'  disabled={buttonIsDisabled()} type="submit" > <FaPlusCircle/>Guardar</Button>
         </Form>
         </div>
     )

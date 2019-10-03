@@ -1,9 +1,9 @@
-import React ,{useState, useEffect}from 'react';
-import {Form, FormGroup, Input, Button, Label} from 'reactstrap';
+import React from 'react';
+import {Form, FormGroup, Input, Button, Label, Container} from 'reactstrap';
 import useGenericInput from './../../hooks/useGenericInput'
 import {peliculaAsyncAtionCreate} from '../../store/modules/peliculas/peliculas.actions'
 import { useDispatch } from 'react-redux';
-
+import { FaPlusCircle,FaArrowAltCircleLeft} from 'react-icons/fa';
 
 
 const FormCreate = (props) => {
@@ -12,7 +12,6 @@ const FormCreate = (props) => {
     const autor = useGenericInput('','text')
 
     const dispatch = useDispatch();
-    const [registro,setRegistro]=useState(false);
     const buttonIsDisabled = () => titulo.value === '' || descripcion.value === '' || autor.value === '';
     
 
@@ -22,21 +21,17 @@ const FormCreate = (props) => {
                     "autor":autor.value,
                     "descripcion":descripcion.value}
             dispatch(peliculaAsyncAtionCreate(array)); 
-            setRegistro(true);
-            props.history.push("/peliculas");
-          
-       
+           
+            props.history.push("/inicio/peliculas");
     }
 
-    useEffect(()=>{
-        // props.history.push("/peliculas"); 
-     
-        // props.history('/peliculas')
-    },[registro])
 
-
+const handleCancel=()=>{
+    props.history.push("/inicio/peliculas");
+}
 
     return (
+        <Container>
         <Form  onSubmit={handled}>
             <FormGroup>
                 <Label>Titulo</Label>
@@ -50,8 +45,11 @@ const FormCreate = (props) => {
                 <Label>Descripción</Label>
                 <Input {...descripcion} />
             </FormGroup>
-            <Button color='info' disabled={buttonIsDisabled()} type="submit" >Crear</Button>
+            <Button color='warning'  onClick={handleCancel}><FaArrowAltCircleLeft/> Cancelar</Button>
+            <Button color='info' disabled={buttonIsDisabled()} type="submit" ><FaPlusCircle/> Crear</Button>
+          
         </Form>
+        </Container>
     )
 }
 

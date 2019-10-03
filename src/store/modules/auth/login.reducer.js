@@ -23,7 +23,7 @@ const loginReducer = (prevState = initialState, action) => {
             };
 
         case AUTH_LOGIN_SUCCESS:
-            localStorage.setItem('jwt', action.payload);
+            localStorage.setItem('toke', action.payload);
             return {
                 ...prevState,
                 data: action.payload,
@@ -42,7 +42,7 @@ const loginReducer = (prevState = initialState, action) => {
             };
 
         case AUTH_LOGOUT:
-            localStorage.clear();
+            localStorage['toke']=null;
             return {
                 ...prevState,
                 data: null,

@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-In the project directory, you can run:
+Para iniciar Sesión usar las credenciales nombre: admin password:admin1234
 
 ### `npm start`
 

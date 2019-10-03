@@ -10,7 +10,8 @@ const peliculasActionERROR = (data) => ({ type: ERROR, payload: data });
 export const peliculaAsyncAtionGetAll = () => {
     return (dispatch)=>{
         dispatch(peliculasActionStart());
-      peliculasGetAll().then(res=>{
+        const token=localStorage.getItem('toke');
+      peliculasGetAll(token).then(res=>{
           dispatch(peliculasActionSUCCESS(res.data.data));  
       }).catch(error=>{
           dispatch(peliculasActionERROR(error.data));
@@ -22,9 +23,9 @@ export const peliculaAsyncAtionGetAll = () => {
 export const peliculaAsyncAtionCreate = (data) => {
     return (dispatch)=>{
         dispatch(peliculasActionStart());
-        peliculasCreate(data).then(res=>{
-
-          dispatch(peliculasActionSUCCESS(res.data.data));  
+        const token=localStorage.getItem('toke');
+        peliculasCreate(data,token).then(res=>{
+          dispatch(peliculaAsyncAtionGetAll());
       }).catch(error=>{
           dispatch(peliculasActionERROR(error.data));
       });
@@ -34,8 +35,10 @@ export const peliculaAsyncAtionCreate = (data) => {
 export const peliculaAsyncAtionEdit = (data) => {
      return (dispatch)=>{
         dispatch(peliculasActionStart());
-        peliculasUpdate(data).then(res=>{
-          dispatch(peliculasActionSUCCESS(res.data.data));  
+        const token=localStorage.getItem('toke');
+        peliculasUpdate(data,token).then(res=>{
+           
+           
       }).catch(error=>{
           dispatch(peliculasActionERROR(error));
       });
@@ -45,7 +48,9 @@ export const peliculaAsyncAtionEdit = (data) => {
 export const peliculaAsyncAtionDelete = (data) => {
     return (dispatch)=>{
        dispatch(peliculasActionStart());
-       peliculasDelete(data).then(res=>{
+       const token=localStorage.getItem('toke');
+       peliculasDelete(data,token).then(res=>{
+           dispatch(peliculaAsyncAtionGetAll());
          dispatch(peliculasActionSUCCESS(res.data.data));  
      }).catch(error=>{
          dispatch(peliculasActionERROR(error));

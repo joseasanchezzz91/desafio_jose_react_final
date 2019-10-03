@@ -4,6 +4,7 @@ import { Input, Button, Form, FormGroup, Label, Card, Container, Col, Row, CardH
 import useInput from '../../hooks/useGenericInput';
 import { loginActionsAsyncCreator as loginAction } from '../../store/modules/auth/login.actions';
 
+
 const Login = (props) => {
     const dispatch = useDispatch();
     const jwt = useSelector(store => store.login.auth.data);
@@ -15,7 +16,7 @@ const Login = (props) => {
 
     useEffect(() => {
         if (jwt !== null) {
-            props.history.push('/inicio')
+            props.history.push('/inicio/bienvenido');
         }
     }, [jwt])
 
@@ -24,7 +25,7 @@ const Login = (props) => {
             <Row>
                 <Col sm={{ size: 4, offset: 4}}>
                     <Card>
-                        <CardHeader>Inicio de sesión</CardHeader>
+                        <CardHeader className="text-center"><h4>Login</h4></CardHeader>
                         <CardBody>
                             <Form>
                                 <pre className="text-left">
@@ -37,7 +38,7 @@ const Login = (props) => {
                                     <Label>Contraseña</Label>
                                     <Input {...password} />
                                 </FormGroup>
-                                <Button
+                                <Button color="success"
                                     disabled={buttonIsDisabled()}
                                     onClick={() => dispatch(loginAction(email.value, password.value))}
                                 >Iniciar Sesión</Button>

@@ -2,13 +2,13 @@ import axios from 'axios';
 import { apiHost } from '../configure';
 
 class ApiError extends Error { }
-const prevJwt = localStorage.getItem('toke');
 
-export const peliculasGetAll = async (data) => {
+
+export const peliculasGetAll = async (token) => {
     try {
         return await axios.get(`${apiHost}/api/peliculas`, {
             headers: {
-                authorization: `bearer ${prevJwt}`,
+                authorization: `bearer ${token}`,
             },
         });
     } catch (error) {
@@ -18,11 +18,11 @@ export const peliculasGetAll = async (data) => {
     }
 };
 
-export const peliculasUpdate = async (data) => {
+export const peliculasUpdate = async (data,token) => {
     try {
         return await axios.put(`${apiHost}/api/peliculas/${data.id}`,data,{
             headers: {
-                authorization: `bearer ${prevJwt}`,
+                authorization: `bearer ${token}`,
                 data: data,
             },
         });
@@ -34,11 +34,11 @@ export const peliculasUpdate = async (data) => {
 };
 
 
-export const peliculasCreate = async (data) => {
+export const peliculasCreate = async (data,token) => {
     try {
         return await axios.post(`${apiHost}/api/peliculas/`, data,{
             headers: {
-                authorization: `bearer ${prevJwt}`,
+                authorization: `bearer ${token}`,
                 data: data,
             },
         });
@@ -50,12 +50,11 @@ export const peliculasCreate = async (data) => {
 };
 
 
-export const peliculasDelete = async (data) => {
+export const peliculasDelete = async (data,token) => {
     try {
-        return await axios.delete(`${apiHost}/api/peliculas/${data.id}`,data,{
+        return await axios.delete(`${apiHost}/api/peliculas/${data.id}`,{
             headers: {
-                authorization: `bearer ${prevJwt}`,
-                data: data,
+                authorization: `bearer ${token}`
             },
         });
     } catch (error) {

@@ -10,26 +10,20 @@ const Home = (props) => {
     useEffect(
         () => {
             dispatch(peliculaAsyncAtionGetAll())
-        }, []
+        }, [dispatch]
     );
     const data = useSelector(store => store.peliculas.getAll.data);
 const handleDelete=(e)=>{
 
-    let array={
-      "id":e.id,
-        "titulo":e.titulo,
-         "autor":e.autor,
-          "descripcion":e.descripcion}
-
-      
     dispatch(peliculaAsyncAtionDelete(e))
-    props.history.push("/");
+    props.history.push("/inicio/peliculas");
 }
 
     return (
         <Card style={{ width: '100%', height: '100%' }}>
+
             <CardHeader>
-                <Link to="/createpeliculas"> <Button style={{ color: 'white' }} color="info"> Agregar </Button> </Link>
+                <Link to="/inicio/peliculas/createpeliculas"> <Button style={{ color: 'white' }} color="primary"> Agregar </Button> </Link>
             </CardHeader>
             <CardBody>
                 <Table dark>
@@ -53,7 +47,7 @@ const handleDelete=(e)=>{
                                     <td> {e.descripcion} </td>
                                     <td>
                                         <Link to={{
-                                            pathname: '/editpeliculas', state: {
+                                            pathname: '/inicio/peliculas/editpeliculas', state: {
                                                 data: e
                                             }
                                         }}><Button style={{ color: 'white' }} color="warning" >

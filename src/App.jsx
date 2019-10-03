@@ -5,14 +5,9 @@ import Home from './components/peliculas/Home';
 import FormCreate from './components/peliculas/FormCreate';
 import FormEdit from './components/peliculas/FormEdit';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink } from 'reactstrap';
+import Login from './views/login/Login';
+import RoutePrivate from './components/route-private/RoutePrivate';
+import Inicio from './components/peliculas/Inicio';
 
 
 function App() {
@@ -21,26 +16,15 @@ function App() {
     <div className="App">
       <Provider store={store}>
       <Router>
-      <Navbar className="navbar-dark bg-dark"  expand="md" style={{color:"#ffff"}}>
-          <NavbarBrand href="/">Proyecto React</NavbarBrand>
-          <NavbarToggler /> {/*onClick={this.toggle}*/}
-          <Collapse  navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/peliculas/">Peliculas</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="users">Users</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
+      
+          <Route path="/" exact  component={Login} />
+    
         <Switch>
-         
-          <Route path="/peliculas" component={Home} />
-          <Route path="/users" />
-          <Route path="/createpeliculas"  component={FormCreate} />
-          <Route path="/editpeliculas"  component={FormEdit} />
+          <RoutePrivate path="/inicio" exact  component={Inicio} />
+          <RoutePrivate path="/peliculas" exact component={Home} />
+          <RoutePrivate path="/home/users" exact />
+          <RoutePrivate path="/createpeliculas" exact component={FormCreate} />
+          <RoutePrivate path="/editpeliculas"  exact component={FormEdit} />
         </Switch>
     </Router>
       </Provider>

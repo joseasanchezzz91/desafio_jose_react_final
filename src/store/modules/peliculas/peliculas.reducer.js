@@ -27,6 +27,7 @@ const peliculasReducer = (prevState = initialState, action) => {
                 loading: false,
                 success: true,
                 data: action.payload,
+                token: localStorage.getItem('toke')
             }
         case ERROR:
             return {

@@ -2,14 +2,14 @@ import axios from 'axios';
 import { apiHost } from '../configure';
 
 class ApiError extends Error { }
-const prevJwt = () => JSON.parse(localStorage.getItem('jwt')) || '';
+const prevJwt = localStorage.getItem('toke');
 
 export const peliculasGetAll = async (data) => {
     try {
         return await axios.get(`${apiHost}/api/peliculas`, {
-            // headers: {
-            //     authorization: `bearer ${prevJwt().token}`,
-            // },
+            headers: {
+                authorization: `bearer ${prevJwt}`,
+            },
         });
     } catch (error) {
         const status = error.response.status;
@@ -22,7 +22,7 @@ export const peliculasUpdate = async (data) => {
     try {
         return await axios.put(`${apiHost}/api/peliculas/${data.id}`,data,{
             headers: {
-                // authorization: `bearer ${prevJwt().token}`,
+                authorization: `bearer ${prevJwt}`,
                 data: data,
             },
         });
@@ -38,6 +38,7 @@ export const peliculasCreate = async (data) => {
     try {
         return await axios.post(`${apiHost}/api/peliculas/`, data,{
             headers: {
+                authorization: `bearer ${prevJwt}`,
                 data: data,
             },
         });
@@ -53,7 +54,7 @@ export const peliculasDelete = async (data) => {
     try {
         return await axios.delete(`${apiHost}/api/peliculas/${data.id}`,data,{
             headers: {
-                // authorization: `bearer ${prevJwt().token}`,
+                authorization: `bearer ${prevJwt}`,
                 data: data,
             },
         });

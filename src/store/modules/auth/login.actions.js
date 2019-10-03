@@ -22,9 +22,9 @@ const successActionCreator = (data) => ({
     payload: data,
 })
 
-const errorActionCreator = () => ({
+const errorActionCreator = (data) => ({
     type: AUTH_LOGIN_ERROR,
-    payload: null,
+    payload: data,
 })
 
 
@@ -39,7 +39,6 @@ export const loginActionsAsyncCreator = (email, password) => {
             }else{
                 dispatch(errorActionCreator(data.message));
             }
-           
             localStorage['toke']=data.token;
             localStorage['login']=data.ok;
         }).catch(err => {

@@ -5,10 +5,11 @@ import { peliculaAsyncAtionGetAll ,peliculaAsyncAtionDelete} from '../../store/m
 import { Link } from 'react-router-dom';
 
 const Home = (props) => {
-
+    
     const dispatch = useDispatch();
     useEffect(
         () => {
+           
             dispatch(peliculaAsyncAtionGetAll())
         }, [dispatch]
     );

@@ -8,9 +8,10 @@ import { loginActionsAsyncCreator as loginAction } from '../../store/modules/aut
 const Login = (props) => {
     const dispatch = useDispatch();
     const jwt = useSelector(store => store.login.auth.data);
-    console.log(JSON.stringify(jwt))
+ 
+    // console.log(JSON.stringify(jwt))
     const email = useInput('', '');
-    const password = useInput('', '');
+    const password = useInput('', 'password');
 
     const buttonIsDisabled = () => password.value === '' || email.value === '';
 
@@ -18,6 +19,7 @@ const Login = (props) => {
         if (jwt !== null) {
             props.history.push('/inicio/bienvenido');
         }
+    
     }, [jwt])
 
     return (

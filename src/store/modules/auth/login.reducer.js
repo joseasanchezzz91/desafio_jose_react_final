@@ -43,6 +43,7 @@ const loginReducer = (prevState = initialState, action) => {
 
         case AUTH_LOGOUT:
             localStorage['toke']=null;
+            localStorage['login']=false;
             return {
                 ...prevState,
                 data: null,

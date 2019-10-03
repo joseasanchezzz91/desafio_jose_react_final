@@ -25,6 +25,7 @@ const userModule = (app, db) => {
                     sign(p_username, (err, token) => {
                         res.send({
                             token,
+                            ok:true,
                             message: "success"
                         })
                     });

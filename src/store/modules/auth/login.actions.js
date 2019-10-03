@@ -34,9 +34,14 @@ export const loginActionsAsyncCreator = (email, password) => {
 
         loginService({ username:email, password:password }).then(data => {
             console.log("data",data);
-            
-            dispatch(successActionCreator(data.data));
+            if(data.message === 'success'){
+                dispatch(successActionCreator(data.token));
+            }else{
+                dispatch(errorActionCreator(data.message));
+            }
+           
             localStorage['toke']=data.token;
+            localStorage['login']=data.ok;
         }).catch(err => {
             dispatch(errorActionCreator(err));
         })
